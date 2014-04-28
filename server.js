@@ -1,5 +1,5 @@
 var connect = require('connect');
 
 connect.createServer(
-    connect.static('../angular')
+    connect.static('.')
 ).listen(5000);
