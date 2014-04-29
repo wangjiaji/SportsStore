@@ -30,14 +30,14 @@
             todoApp.controller('TodoCtrl', function ($scope) {
                 $scope.todo = model;
 
-                $scope.incomplteCount = function () {
+                $scope.incompleteCount = function () {
                     return $scope.todo.items.filter(function (item) {
                         return !item.done;
                     }).length;
                 };
 
                 $scope.warningLevel = function () {
-                    return $scope.incomplteCount() < 3 ? 'label-success' : 'label-warning';
+                    return $scope.incompleteCount() < 3 ? 'label-success' : 'label-warning';
                 };
 
                 $scope.addNewItem = function (action) {
@@ -50,8 +50,8 @@
         <div class="page-header">
             <h1>
                 {{todo.user}}'s todo list
-                <span class="label label-default" ng-hide="incomplteCount() === 0" ng-class="warningLevel()">
-                    {{incomplteCount()}} items
+                <span class="label label-default" ng-hide="incompleteCount() === 0" ng-class="warningLevel()">
+                    {{incompleteCount()}} items
                 </span>
             </h1>
         </div>
