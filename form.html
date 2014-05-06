@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>AngluarJS Demo</title>
+        <script src="angularjs/angular.js"></script>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
+        <style>
+            td > *:first-child { font-weight: bold; }
+            td.Red, tr.Red { background-color: red; }
+            td.Green, tr.Green { background-color: green; }
+            td.Blue, tr.Blue { background-color: blue; }
+        </style>
+        <script>
+            angular.module('exampleApp', [])
+                .controller('defaultCtrl', function ($scope) {
+                    $scope.data = {};
+                    $scope.buttonNames = ['Red', 'Green', 'Blue'];
+                    $scope.settings = {
+                        Rows: 'Red',
+                        Columns: 'Green'
+                    };
+
+                    $scope.todos = [{
+                        action: 'Get groceries', complete: false,
+                    }, {
+                        action: 'Call plumber', complete: false,
+                    }, {
+                        action: 'Buy running shoes', complete: true,
+                    }, {
+                        action: 'Buy flowers', complete: false,
+                    }, {
+                        action: 'Call family', complete: false,
+                    }, {
+                        action: 'Learn AngularJS', complete: false,
+                    }];
+
+                    $scope.addNewItem = function (newItem) {
+                        $scope.todos.push({
+                            action: newItem.action + '(' + newItem.location + ')',
+                            complete: false
+                        });
+                    };
+
+                    $scope.addUser = function (user) {
+                        $scope.message = user.name + '(' + user.email + ')(' + user.agreed + ')';
+                    };
+
+                    $scope.message = "ready!";
+                })
+                .directive('tap', function () {
+                    return function (scope, elem, attrs) {
+                        elem.on('touchstart touchend', function () {
+                            scope.$apply(attrs['tap']);
+                        });
+                    }
+                });
+
+        </script>
+    </head>
+    <body>
+        <div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+            <h3 class="panel-head">
+                Todo List
+                <span class="label label-info">
+                    {{(todos | filter: { complete: false }).length}}
+                </span>
+            </h3>
+
+            <form name="userForm" novalidate ng-submit="addUser(newUser)">
+                <div class="well">
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input name="name" type="text" class="form-control"
+                            required ng-model="newUser.name" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input name="email" type="email" class="form-control"
+                            required ng-model="newUser.email" />
+                    </div>
+                    <div class="form-group">
+                        <label>Agreed:</label>
+                        <input name="agreed" type="checkbox" class="form-control"
+                            required ng-model="newUser.agreed" />
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block"
+                        ng-disable="userForm.$invalid">
+                        OK
+                    </button>
+                </div>
+                <div class="well">
+                    Message: {{message}}
+                    <div>
+                        Valid: {{userForm.$valid}}
+                    </div>
+                </div>
+            </form>
+
+            <div class="checkbox well">
+                <label>
+                    <input type="checkbox" ng-model="todos[2].complete" />
+                    Item 3 is completed
+                </label>
+            </div>
+
+            <div class="row well">
+                <div class="col-xs-6" ng-repeat="(key, val) in settings">
+                    <h4>{{key}}</h4>
+                    <div class="radio" ng-repeat="button in buttonNames">
+                        <label>
+                            <input type="radio" ng-model="settings[key]" value="{{button}}">
+                            {{button}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+                    <div class="well">
+                        <div class="form-group">
+                            <label for"actionText">Action:</label>
+                            <input id="actionText" class="form-control"
+                                ng-model="newTodo.action" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="actionLocation">Location:</label>
+                        <select id="actionLocation" class="form-control"
+                            ng-model="newTodo.location">
+                            <option>Home</option>
+                            <option>Office</option>
+                            <option>Mall</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary btn-block"
+                        ng-click="addNewItem(newTodo)">
+                        Add
+                    </button>
+   
+            <table class="table">
+                <thead>
+                    <tr><th>#</th><th>Action</th><th>Done</th></tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="todo in todos" ng-class-even="settings.Rows">
+                        <td>{{$index + 1}}</td>
+                        <td>{{todo.action}}</td>
+                        <td ng-class-odd="settings.Columns">
+                            <input type="checkbox" ng-model="todo.complete" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

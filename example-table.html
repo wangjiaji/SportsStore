@@ -1,0 +1,17 @@
+<table class="table table-striped table-border">
+    <thead>
+        <tr><th>Action</th><th>Completed</th></tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat-start="item in todos">
+            <td>This is item {{$index}}</td>
+        </tr>
+        <tr>
+            <td>The action is: {{item.action}}</td>
+        </tr>
+        <tr ng-repeat-end>
+            <td>Item {{$index}} is {{item.complete ? '' : 'not '}} completed</td>
+        </tr>
+    </tbody>
+</table>
+

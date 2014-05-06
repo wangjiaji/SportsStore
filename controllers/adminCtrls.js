@@ -1,6 +1,6 @@
 angular.module('sportsStoreAdmin')
     .constant('authUrl', 'http://auth15.apiary-mock.com/login')
-    .constant('authUrl', 'http://orders5.apiary-mock.com/orders')
+    .constant('ordersUrl', 'http://orders5.apiary-mock.com/orders')
     .controller('authCtrl', function ($scope, $http, $location, authUrl) {
         $scope.authenticate = function (user, pass) {
             $http.post(authUrl, {
@@ -29,7 +29,7 @@ angular.module('sportsStoreAdmin')
         };
     })
     .controller('ordersCtrl', function ($scope, $http, ordersUrl) {
-        $http.get(ordersUrl, { withCredentials: true })
+        $http.get(ordersUrl)
             .success(function (data) {
                 $scope.orders = data;
             })

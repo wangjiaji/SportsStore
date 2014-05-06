@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>AngluarJS Demo</title>
+        <script src="angularjs/angular.js"></script>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
+        <script>
+            angular.module('exampleApp', [])
+                .controller('defaultCtrl', function ($scope) {
+                    $scope.data = {};
+
+                    $scope.todos = [{
+                        action: 'Get groceries', complete: false,
+                    }, {
+                        action: 'Call plumber', complete: false,
+                    }, {
+                        action: 'Buy running shoes', complete: true,
+                    }, {
+                        action: 'Buy flowers', complete: false,
+                    }, {
+                        action: 'Call family', complete: false,
+                    }, {
+                        action: 'Learn AngularJS', complete: false,
+                    }];
+                });
+        </script>
+    </head>
+    <body>
+        <div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+            <h3 class="panel-header">Todo List</h3>
+
+            <div>There are {{todos.length}} items</div>
+            <div>There are <i ng-bind="todos.length"></i> items</div>
+            <div ng-bind-template="First: {{todos[0].action}}. Second: {{todos[1].action}}">
+                And that's all
+            </div>
+            <div class="well">
+                <div class="radio" ng-repeat="button in ['None', 'Table', 'List']">
+                    <label>
+                        <input type="radio" ng-model="data.mode"
+                            value="{{button}}" ng-checked="$first" />
+                            {{button}}
+                    </label>
+                </div>
+            </div>
+            <div ng-switch on="data.mode">
+                <div ng-switch-when="Table">
+                    <ng-include src="'example-table.html'"></ng-include>
+                </div>
+                <div ng-switch-when="List">
+                    <ng-include src="'example-list.html'"></ng-include>
+                </div>
+                <div ng-switch-default>
+                    There is nothing here
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
