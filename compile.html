@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>Compile</title>
+        <script src="angularjs/jquery.js"></script>
+        <script src="angularjs/angular.js"></script>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
+        <script type="text/ng-template" id="template">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>This is the panel</h4>
+                </div>
+                <div class="panel-body" ng-transclude>
+                </div>
+            </div>
+        </script>
+        <script>
+            angular.module('exampleApp', [])
+                .directive('simpleRepeater', function () {
+                    return {
+                        transclude: 'element',
+                        scope: {
+                            data: '=source',
+                            propName: '@itemName'
+                        },
+                        compile: function (element, attrs, transcludeFn) {
+                            return function ($scope, $elem, $attrs) {
+                                $scope.$watch('data.length', function () {
+                                    var parent = $elem.parent();
+                                    parent.children().remove();
+                                    $scope.data.forEach(function (d) {
+                                        var childScope = $scope.$new();
+                                        childScope[$scope.propName] = d;
+                                        transcludeFn(childScope, function (clone) {
+                                            parent.append(clone);
+                                        });
+                                    });
+                                });
+                            };
+                        }
+                    };
+                })
+                .controller('defaultCtrl', function ($scope) {
+                    $scope.products = [
+                        { name: 'Apples', price: 1.2 },
+                        { name: 'Bananas', price: 2.42 },
+                        { name: 'Pears', price: 2.02 }
+                    ];
+
+                    $scope.changeData = function () {
+                        $scope.products.push({ name: 'Cherries', price: 4.02 });
+                        $scope.products.forEach(function (product) {
+                            product.price++;
+                        });
+                    };
+                });
+        </script>
+    </head>
+    <body ng-controller="defaultCtrl">
+        <table class="table table-striped">
+            <thead>
+                <tr><th>Name</th><th>Price</th></tr>
+            </thead>
+            <tbody>
+                <tr simple-repeater source="products" item-name="item">
+                    <td>{{item.name}}</td><td>{{item.price | currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-default text" ng-click="changeData()">Change</button>
+    </body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>Compile</title>
+        <script src="angularjs/jquery.js"></script>
+        <script src="angularjs/angular.js"></script>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
+        <style>
+            .error {
+                color: red;
+                font-weight: bold;
+            }
+        </style>
+        <script type="text/ng-template" id="template">
+            <div class="well">
+                <div class="btn-group">
+                    <button class="btn btn-default">Yes</button>
+                    <button class="btn btn-default">No</button>
+                    <button class="btn btn-default">Not Sure</button>
+                    <span class="alert alert-warning" ng-show="myForm.decision.$error.confidence">
+                        You need to be sure
+                    </span>
+                </div>
+            </div>
+        </script>
+        <script>
+            angular.module('exampleApp', [])
+                .directive('triButton', function () {
+                    return {
+                        restrict: 'E',
+                        replace: true,
+                        require: 'ngModel',
+                        template: document.querySelector('#template').outerText,
+                        link: function (scope, element, attrs, ctrl) {
+                            element.on('click', function (event) {
+                                setSelected(event.target.innerText);
+                                scope.$apply(function () {
+                                    ctrl.$setViewValue(event.target.innerText);
+                                });
+                            });
+
+                            var setSelected = function (value) {
+                                var buttons = element.find('button');
+                                buttons.removeClass('btn-primary');
+                                buttons.each(function () {
+                                    var button = angular.element(this);
+                                    if (button.text() === value) {
+                                        button.addClass('btn-primary');
+                                    }
+                                });
+                            };
+
+                            ctrl.$render = function () {
+                                setSelected(ctrl.$viewValue || 'Not Sure');
+                            };
+
+                            ctrl.$formatters.push(function (value) {
+                                return value === 'Huh?' ? 'Not Sure' : value;
+                            });
+
+                            ctrl.$parsers.push(function (value) {
+                                var valid = (value === 'Yes' || value === 'No');
+                                ctrl.$setValidity('confidence', valid);
+                                return valid ? value : undefined;
+                            });
+                        }
+                    };
+                })
+                .controller('defaultCtrl', function ($scope) {
+                    $scope.dataValue = 'Not Sure';
+                });
+        </script>
+    </head>
+    <body ng-controller="defaultCtrl">
+        <form name="myForm" novalidate>
+            <div><tri-button ng-model="dataValue" /></div>
+        </form>
+        <div class="well">
+            Value:
+            <select ng-model="dataValue">
+                <option>Yes</option>
+                <option>No</option>
+                <option>Not Sure</option>
+                <option>Huh?</option>
+            </select>
+    </body>
+</html>

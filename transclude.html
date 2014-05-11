@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>Transclude</title>
+        <script src="angularjs/jquery.js"></script>
+        <script src="angularjs/angular.js"></script>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
+        <script type="text/ng-template" id="template">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>This is the panel</h4>
+                </div>
+                <div class="panel-body" ng-transclude>
+                </div>
+            </div>
+        </script>
+        <script>
+            angular.module('exampleApp', [])
+                .directive('panel', function () {
+                    return {
+                        template: function () {
+                            return angular.element(document.querySelector('#template')).html();
+                        },
+                        transclude: true,
+                        scope: true,
+                        restrict: 'E',
+                        link: function (scope, elem, attrs) {
+                            scope.dataSource = 'directive';
+                        }
+                    };
+                })
+                .controller('defaultCtrl', function ($scope) {
+                    $scope.dataSource = 'controller';
+                });
+        </script>
+    </head>
+    <body ng-controller="defaultCtrl">
+        <panel>
+            The data value comes from the: {{dataSource}}
+        </panel>
+    </body>
+</html>

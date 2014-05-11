@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>Directive Controller</title>
+        <script src="angularjs/jquery.js"></script>
+        <script src="angularjs/angular.js"></script>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
+        <script type="text/ng-template" id="template">
+            <td>{{item.name}}</td>
+            <td><input ng-model="item.quantity" /></td>
+        </script>
+        <script type="text/ng-template" id="resetTemplate">
+            <td colspan="2"><button ng-click="reset()">Rest</button></td>
+        </script>
+        <script>
+            angular.module('exampleApp', [])
+                .directive('productItem', function () {
+                    return {
+                        template: document.querySelector('#template').outerText,
+                        require: '^productTable',
+                        link: function (scope, elem, attrs, ctrl) {
+                            scope.$watch('item.quantity', function () {
+                                ctrl.updateTotal();
+                            });
+                        }
+                    };
+                })
+                .directive('productTable', function () {
+                    return {
+                        transclude: true,
+                        scope: {
+                            value: '=productTable',
+                            data: '=productData'
+                        },
+                        controller: function ($scope, $element, $attrs) {
+                            this.updateTotal = function () {
+                                var total = 0;
+                                $scope.data.forEach(function (d) {
+                                    total += +d.quantity || 0;
+                                });
+                                $scope.value = total;
+                            };
+                        }
+                    };
+                })
+                .directive('resetTotals', function () {
+                    return {
+                        scope: {
+                            data: '=productData',
+                            propname: '@propertyName'
+                        },
+                        template: document.querySelector('#resetTemplate').outerText,
+                        require: '^productTable',
+                        link: function (scope, elem, attrs, ctrl) {
+                            scope.reset = function () {
+                                scope.data.forEach(function (d) {
+                                    d[scope.propname] = 0;
+                                });
+                                console.log(scope.data);
+                                ctrl.updateTotal();
+                            };
+                        }
+                    };
+                })
+                .controller('defaultCtrl', function ($scope) {
+                    $scope.products = [
+                        { name: 'Apples', price: 1.2 },
+                        { name: 'Bananas', price: 2.42 },
+                        { name: 'Pears', price: 2.02 }
+                    ];
+
+                    $scope.$watch('totalValue', function (newVal, oldVal) {
+                        console.log(newVal, oldVal);
+                    });
+                });
+        </script>
+    </head>
+    <body ng-controller="defaultCtrl">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table table-striped" product-table="totalValue"
+                    product-data="products" ng-transclude>
+                    <thead>
+                        <tr><th>Name</th><th>Price</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in products" product-item></tr>
+                        <tr><th>Total:</th><td>{{totalValue}}</td></tr>
+                    </tbody>
+                    <tfoot>
+                        <tr reset-totals product-data="products" property-name="quantity"></tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <button class="btn btn-default text" ng-click="changeData()">Change</button>
+    </body>
+</html>
