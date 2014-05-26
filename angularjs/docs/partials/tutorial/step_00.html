@@ -26,9 +26,9 @@ The code contains some key Angular elements that we will need as we progress.</p
 &lt;head&gt;
   &lt;meta charset=&quot;utf-8&quot;&gt;
   &lt;title&gt;My HTML File&lt;/title&gt;
-  &lt;link rel=&quot;stylesheet&quot; href=&quot;../bower_components/bootstrap/dist/css/bootstrap.css&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;bower_components/bootstrap/dist/css/bootstrap.css&quot;&gt;
   &lt;link rel=&quot;stylesheet&quot; href=&quot;css/app.css&quot;&gt;
-  &lt;script src=&quot;../bower_components/angular/angular.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;bower_components/angular/angular.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
 
@@ -49,7 +49,7 @@ This gives application developers the freedom to tell Angular if the entire html
 portion of it should be treated as the Angular application.</p>
 </li>
 <li><p>AngularJS script tag:</p>
-<pre><code>    &lt;script src=&quot;../bower_components/angular/angular.js&quot;&gt;</code></pre>
+<pre><code>    &lt;script src=&quot;bower_components/angular/angular.js&quot;&gt;</code></pre>
 <p>This code downloads the <code>angular.js</code> script and registers a callback that will be executed by the
 browser when the containing HTML page is fully downloaded. When the callback is executed, Angular
 looks for the <a href="api/ng/directive/ngApp">ngApp</a> directive. If
@@ -96,7 +96,8 @@ and one static binding, and our model is empty. That will soon change!</p>
 <h2 id="what-are-all-these-files-in-my-working-directory-">What are all these files in my working directory?</h2>
 <p>Most of the files in your working directory come from the <a href="https://github.com/angular/angular-seed">angular-seed project</a> which
 is typically used to bootstrap new Angular projects. The seed project is pre-configured to install
-the angular framework (via <code>bower</code>) and tools for developing a typical web app (via <code>npm</code>).</p>
+the angular framework (via <code>bower</code> into the <code>app/bower_components/</code> folder) and tools for developing
+a typical web app (via <code>npm</code>).</p>
 <p>For the purposes of this tutorial, we modified the angular-seed with the following changes:</p>
 <ul>
 <li>Removed the example app</li>

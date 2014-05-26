@@ -20,7 +20,7 @@ is being issued on the element at the given time (e.g. inserting and removing no
 <p>The animation functionality is provided by Angular in the <code>ngAnimate</code> module, which is distributed
 separately from the core Angular framework.  In addition we will use <code>JQuery</code> in this project to do
 extra JavaScript animations.</p>
-<p>We are using [Bower][bower] to install client side dependencies.  This step updates the
+<p>We are using <a href="http://bower.io/">Bower</a> to install client side dependencies.  This step updates the
 <code>bower.json</code> configuration file to include the new dependency:</p>
 <pre><code>{
   &quot;name&quot;: &quot;angular-seed&quot;,
@@ -42,7 +42,7 @@ extra JavaScript animations.</p>
 <ul>
 <li><code>&quot;angular-animate&quot;: &quot;~1.2.x&quot;</code> tells bower to install a version of the
 angular-animate component that is compatible with version 1.2.x.</li>
-<li><code>&quot;jquery&quot;: &quot;1.10.2&quot;</code> tells bower to install the 1.1.2 version of JQuery.  Note that this is not an
+<li><code>&quot;jquery&quot;: &quot;1.10.2&quot;</code> tells bower to install the 1.10.2 version of JQuery.  Note that this is not an
 Angular library, it is the standard JQuery library.  We can use bower to install a wide range of 3rd
 party libraries.</li>
 </ul>
@@ -71,12 +71,12 @@ aware.</p>
   ...
 
   &lt;!-- jQuery is used for JavaScript animations (include this before angular.js) --&gt;
-  &lt;script src=&quot;../bower_components/jquery/jquery.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;bower_components/jquery/jquery.js&quot;&gt;&lt;/script&gt;
 
   ...
 
   &lt;!-- required module to enable animation support in AngularJS --&gt;
-  &lt;script src=&quot;../bower_components/angular-animate/angular-animate.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;bower_components/angular-animate/angular-animate.js&quot;&gt;&lt;/script&gt;
 
   &lt;!-- for JavaScript Animations --&gt;
   &lt;script src=&quot;js/animations.js&quot;&gt;&lt;/script&gt;
@@ -257,30 +257,33 @@ is relative to this parent as it animates transitions.</p>
 }
 
 /* don&#39;t forget about the vendor-prefixes! */</code></pre>
-<p>Nothing crazy here! Just a simple fade in and fade out effect between pages. The only out of the ordinary thing
-here is that we&#39;re using absolute positioning to position the next page (identified via <code>ng-enter</code>) on top of the
-previous page (the one that has the <code>ng-leave</code> class) while performing a cross fade animation in between. So
-as the previous page is just about to be removed, it fades out while the new page fades in right on top of it.
-Once the leave animation is over then element is removed and once the enter animation is complete then the
-<code>ng-enter</code> and <code>ng-enter-active</code> CSS classes are removed from the element rendering it to be position itself
-with its default CSS code (so no more absolute positioning once the animation is over). This works fluidly so
-that pages flow naturally between route changes without anything jumping around.</p>
-<p>The CSS classes applied (the start and end classes) are much the same as with <code>ng-repeat</code>. Each time a new page is
-loaded the ng-view directive will create a copy of itself, download the template and append the contents. This
-ensures that all views are contained within a single HTML element which allows for easy animation control.</p>
+<p>Nothing crazy here! Just a simple fade in and fade out effect between pages. The only out of the
+ordinary thing here is that we&#39;re using absolute positioning to position the next page (identified
+via <code>ng-enter</code>) on top of the previous page (the one that has the <code>ng-leave</code> class) while performing
+a cross fade animation in between. So as the previous page is just about to be removed, it fades out
+while the new page fades in right on top of it.</p>
+<p>Once the leave animation is over then element is removed and once the enter animation is complete
+then the <code>ng-enter</code> and <code>ng-enter-active</code> CSS classes are removed from the element rendering it to
+be position itself with its default CSS code (so no more absolute positioning once the animation is
+over). This works fluidly so that pages flow naturally between route changes without anything
+jumping around.</p>
+<p>The CSS classes applied (the start and end classes) are much the same as with <code>ng-repeat</code>. Each time
+a new page is loaded the ng-view directive will create a copy of itself, download the template and
+append the contents. This ensures that all views are contained within a single HTML element which
+allows for easy animation control.</p>
 <p>For more on CSS animations, see the
 <a href="http://docs.webplatform.org/wiki/css/properties/animations">Web Platform documentation</a>.</p>
 <h2 id="animating-ngclass-with-javascript">Animating <code>ngClass</code> with JavaScript</h2>
 <p>Let&#39;s add another animation to our application. Switching to our <code>phone-detail.html</code> page,
 we see that we have a nice thumbnail swapper. By clicking on the thumbnails listed on the page,
 the profile phone image changes. But how can we change this around to add animations?</p>
-<p>Let&#39;s think about it first. Basically, when you click on a thumbnail image, you&#39;re changing the state of the profile image to reflect the newly
-selected thumbnail image.
+<p>Let&#39;s think about it first. Basically, when you click on a thumbnail image, you&#39;re changing the
+state of the profile image to reflect the newly selected thumbnail image.
 The best way to specify state changes within HTML is to use classes.
-Much like before, how we used a CSS class to specify
-an animation, this time the animation will occur whenever the CSS class itself changes.</p>
-<p>Whenever a new phone thumbnail is selected, the state changes and the <code>.active</code> CSS class is added to the matching
-profile image and the animation plays.</p>
+Much like before, how we used a CSS class to specify an animation, this time the animation will
+occur whenever the CSS class itself changes.</p>
+<p>Whenever a new phone thumbnail is selected, the state changes and the <code>.active</code> CSS class is added
+to the matching profile image and the animation plays.</p>
 <p>Let&#39;s get started and tweak our HTML code on the <code>phone-detail.html</code> page first:</p>
 <p><strong><code>app/partials/phone-detail.html</code>.</strong></p>
 <pre><code class="lang-html">&lt;!-- We&#39;re only changing the top of the file --&gt;
@@ -300,16 +303,47 @@ profile image and the animation plays.</p>
     &lt;img ng-src=&quot;{{img}}&quot; ng-mouseenter=&quot;setImage(img)&quot;&gt;
   &lt;/li&gt;
 &lt;/ul&gt;</code></pre>
-<p>Just like with the thumbnails, we&#39;re using a repeater to display <strong>all</strong> the profile images as a list, however we&#39;re
-not animating any repeat-related animations. Instead, we&#39;re keeping our eye on the ng-class directive since whenever
-the <code>active</code> class is true then it will be applied to the element and will render as visible. Otherwise, the profile image
-is hidden. In our case, there is always one element that has the active class, and, therefore, there will always
-be one phone profile image visible on screen at all times.</p>
-<p>When the active class is added to the element, the <code>active-add</code> and the <code>active-add-active</code> classes are added just before
-to signal AngularJS to fire off an animation. When removed, the <code>active-remove</code> and the <code>active-remove-active</code> classes
-are applied to the element which in turn trigger another animation.</p>
+<p>Just like with the thumbnails, we&#39;re using a repeater to display <strong>all</strong> the profile images as a
+list, however we&#39;re not animating any repeat-related animations. Instead, we&#39;re keeping our eye on
+the ng-class directive since whenever the <code>active</code> class is true then it will be applied to the
+element and will render as visible. Otherwise, the profile image is hidden. In our case, there is
+always one element that has the active class, and, therefore, there will always be one phone profile
+image visible on screen at all times.</p>
+<p>When the active class is added to the element, the <code>active-add</code> and the <code>active-add-active</code> classes
+are added just before to signal AngularJS to fire off an animation. When removed, the
+<code>active-remove</code> and the <code>active-remove-active</code> classes are applied to the element which in turn
+trigger another animation.</p>
+<p>To ensure that the phone images are displayed correctly when the page is first loaded we also tweak
+the detail page CSS styles:</p>
+<p><strong><code>app/css/app.css</code></strong></p>
+<pre><code class="lang-css">.phone-images {
+  background-color: white;
+  width: 450px;
+  height: 450px;
+  overflow: hidden;
+  position: relative;
+  float: left;
+}
+
+...
+
+img.phone {
+  float: left;
+  margin-right: 3em;
+  margin-bottom: 2em;
+  background-color: white;
+  padding: 2em;
+  height: 400px;
+  width: 400px;
+  display: none;
+}
+
+img.phone:first-child {
+  display: block;
+  }</code></pre>
 <p>You may be thinking that we&#39;re just going to create another CSS-enabled animation.
-Although we could do that, let&#39;s take the opportunity to learn how to create JavaScript-enabled animations with the <code>animation()</code> module method.</p>
+Although we could do that, let&#39;s take the opportunity to learn how to create JavaScript-enabled
+animations with the <code>animation()</code> module method.</p>
 <p><strong><code>app/js/animations.js</code>.</strong></p>
 <pre><code class="lang-js">var phonecatAnimations = angular.module(&#39;phonecatAnimations&#39;, [&#39;ngAnimate&#39;]);
 
@@ -388,4 +422,6 @@ do any cleanup necessary for when the animation finishes.</p>
 <h1 id="summary">Summary</h1>
 <p>There you have it!  We have created a web app in a relatively short amount of time. In the <a href="tutorial/the_end">closing notes</a> we&#39;ll cover where to go from here.</p>
 <ul doc-tutorial-nav="12"></ul>
+
+
 

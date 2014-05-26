@@ -85,8 +85,8 @@ simplified):</p>
 <code>templateUrl</code>&#39;s specified by <a href="guide/directive">directives</a>.</p>
 <p>By default, Angular only loads templates from the same domain and protocol as the application
 document.  This is done by calling <a href="api/ng/service/$sce#getTrustedResourceUrl">$sce.getTrustedResourceUrl</a> on the template URL.  To load templates from other domains and/or
-protocols, you may either either <a href="api/ng/provider/$sceDelegateProvider#resourceUrlWhitelist">whitelist</a>
-them or <a href="api/ng/service/$sce#trustAsResourceUrl">wrap it</a> into a trusted value.</p>
+protocols, you may either either <a href="api/ng/provider/$sceDelegateProvider#resourceUrlWhitelist">whitelist
+them</a> or <a href="api/ng/service/$sce#trustAsResourceUrl">wrap it</a> into a trusted value.</p>
 <p><em>Please note</em>:
 The browser&#39;s
 <a href="https://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_XMLHttpRequest">Same Origin Policy</a>
@@ -95,7 +95,7 @@ policy apply in addition to this and may further restrict whether the template i
 loaded.  This means that without the right CORS policy, loading templates from a different domain
 won&#39;t work on all browsers.  Also, loading templates from <code>file://</code> URL does not work on some
 browsers.</p>
-<h2 id="this-feels-like-too-much-overhead-for-the-developer-">This feels like too much overhead for the developer?</h2>
+<h2 id="this-feels-like-too-much-overhead">This feels like too much overhead</h2>
 <p>It&#39;s important to remember that SCE only applies to interpolation expressions.</p>
 <p>If your expressions are constant literals, they&#39;re automatically trusted and you don&#39;t need to
 call <code>$sce.trustAs</code> on them (remember to include the <code>ngSanitize</code> module) (e.g.
@@ -121,7 +121,7 @@ security onto an application later.</p>
 <tbody>
 <tr>
 <td><code>$sce.HTML</code></td>
-<td>For HTML that&#39;s safe to source into the application.  The <a href="api/ng/directive/ngBindHtml">ngBindHtml</a> directive uses this context for bindings.</td>
+<td>For HTML that&#39;s safe to source into the application.  The <a href="api/ng/directive/ngBindHtml">ngBindHtml</a> directive uses this context for bindings. If an unsafe value is encountered and the <a href="api/ngSanitize">$sanitize</a> module is present this will sanitize the value instead of throwing an error.</td>
 </tr>
 <tr>
 <td><code>$sce.CSS</code></td>
@@ -238,8 +238,8 @@ have to do it at module config time on <a href="api/ng/provider/$sceProvider">$s
 
 </h3>
     <div><p>Converts Angular <a href="guide/expression">expression</a> into a function.  This is like <a href="api/ng/service/$parse">$parse</a> and is identical when the expression is a literal constant.  Otherwise, it
-wraps the expression in a call to <a href="api/ng/service/$sce#getTrusted">$sce.getTrusted(<em>type</em>,</a>
-<em>result</em>)</p>
+wraps the expression in a call to <a href="api/ng/service/$sce#getTrusted">$sce.getTrusted(<em>type</em>,
+<em>result</em>)</a></p>
 </div>
 
     
@@ -1315,11 +1315,11 @@ are evaluated against (typically a scope object).</li>
   <h2 id="example">Example</h2><p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example64')" class="btn pull-right">
+  <a ng-click="openPlunkr('examples/example-example65')" class="btn pull-right">
     <i class="glyphicon glyphicon-edit">&nbsp;</i>
     Edit in Plunker</a>
   <div class="runnable-example"
-      path="examples/example-example64"
+      path="examples/example-example65"
       module="mySceApp"
       deps="angular-sanitize.js">
 
@@ -1353,7 +1353,7 @@ are evaluated against (typically a scope object).</li>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example64/index.html" name="example-example64"></iframe>
+    <iframe class="runnable-example-frame" src="examples/example-example65/index.html" name="example-example65"></iframe>
   </div>
 </div>
 

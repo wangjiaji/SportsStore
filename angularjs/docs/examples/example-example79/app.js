@@ -8,5 +8,5 @@
     }]);
     myApp.controller('GrandChildController', ['$scope', function($scope) {
       $scope.timeOfDay = 'evening';
-      $scope.name = 'Gingerbreak Baby';
+      $scope.name = 'Gingerbread Baby';
     }]);

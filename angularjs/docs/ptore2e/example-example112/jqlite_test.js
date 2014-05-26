@@ -1,6 +1,6 @@
 describe("services", function() {
   beforeEach(function() {
-    browser.get("./examples/example-example111/index.html");
+    browser.get("./examples/example-example112/index.html");
   });
 
   it('should test service', function() {

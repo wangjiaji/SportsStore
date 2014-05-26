@@ -4,12 +4,13 @@
 
   it('should allow custom events', function() {
     input.sendKeys(' hello');
+    input.click();
     expect(model.getText()).toEqual('say');
     other.click();
     expect(model.getText()).toEqual('say hello');
   });
 
-  it('should $cancelUpdate when model changes', function() {
+  it('should $rollbackViewValue when model changes', function() {
     input.sendKeys(' hello');
     expect(input.getAttribute('value')).toEqual('say hello');
     input.sendKeys(protractor.Key.ESCAPE);

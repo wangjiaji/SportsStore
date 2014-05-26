@@ -28,7 +28,7 @@ array element index. Specifying a <code>context</code> for the function is optio
 using the <code>hasOwnProperty</code> method.</p>
 <pre><code class="lang-js">     var values = {name: &#39;misko&#39;, gender: &#39;male&#39;};
      var log = [];
-     angular.forEach(values, function(value, key){
+     angular.forEach(values, function(value, key) {
        this.push(key + &#39;: &#39; + value);
      }, log);
      expect(log).toEqual([&#39;name: misko&#39;, &#39;gender: male&#39;]);</code></pre>

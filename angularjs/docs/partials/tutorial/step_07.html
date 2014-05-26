@@ -90,8 +90,8 @@ loading the additional <code>angular-route.js</code> file, which we download via
 &lt;html lang=&quot;en&quot; ng-app=&quot;phonecatApp&quot;&gt;
 &lt;head&gt;
 ...
-  &lt;script src=&quot;../bower_components/angular/angular.js&quot;&gt;&lt;/script&gt;
-  &lt;script src=&quot;../bower_components/angular-route/angular-route.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;bower_components/angular/angular.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;bower_components/angular-route/angular-route.js&quot;&gt;&lt;/script&gt;
   &lt;script src=&quot;js/app.js&quot;&gt;&lt;/script&gt;
   &lt;script src=&quot;js/controllers.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
@@ -112,8 +112,8 @@ line containing a div with the <code>ng-view</code> attribute. The code that we 
 <code>phone-list.html</code> template:</p>
 <p><strong><code>app/partials/phone-list.html</code>:</strong></p>
 <pre><code class="lang-html">&lt;div class=&quot;container-fluid&quot;&gt;
-  &lt;div class=&quot;row-fluid&quot;&gt;
-    &lt;div class=&quot;span2&quot;&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-md-2&quot;&gt;
       &lt;!--Sidebar content--&gt;
 
       Search: &lt;input ng-model=&quot;query&quot;&gt;
@@ -124,7 +124,7 @@ line containing a div with the <code>ng-view</code> attribute. The code that we 
       &lt;/select&gt;
 
     &lt;/div&gt;
-    &lt;div class=&quot;span10&quot;&gt;
+    &lt;div class=&quot;col-md-10&quot;&gt;
       &lt;!--Body content--&gt;
 
       &lt;ul class=&quot;phones&quot;&gt;
@@ -145,7 +145,7 @@ TODO!
 
 <p>We also added a placeholder template for the phone details view:</p>
 <p><strong><code>app/partials/phone-detail.html</code>:</strong></p>
-<pre><code class="lang-html">TBD: detail view for {{phoneId}}</code></pre>
+<pre><code class="lang-html">TBD: detail view for &lt;span&gt;{{phoneId}}&lt;/span&gt;</code></pre>
 <p>Note how we are using the <code>phoneId</code> expression which will be defined in the <code>PhoneDetailCtrl</code> controller.</p>
 <h2 id="the-app-module">The App Module</h2>
 <p>To improve the organization of the app, we are making use of Angular&#39;s <code>ngRoute</code> module and we&#39;ve
@@ -190,7 +190,7 @@ construct this view, Angular will use the <code>phone-list.html</code> template 
 controller.</p>
 </li>
 <li><p><code>when(&#39;/phones/:phoneId&#39;)</code>: The phone details view will be shown when the URL hash fragment
-matches &#39;/phone/:phoneId&#39;, where <code>:phoneId</code> is a variable part of the URL. To construct the phone
+matches &#39;/phones/:phoneId&#39;, where <code>:phoneId</code> is a variable part of the URL. To construct the phone
 details view, Angular will use the <code>phone-detail.html</code> template and the <code>PhoneDetailCtrl</code>
 controller.</p>
 </li>

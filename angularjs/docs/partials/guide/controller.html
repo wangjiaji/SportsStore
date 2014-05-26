@@ -21,8 +21,8 @@ has <a href="guide/databinding">databinding</a> for most cases and <a href="guid
 encapsulate manual DOM manipulation.</li>
 <li>Format input — Use <a href="guide/forms">angular form controls</a> instead.</li>
 <li>Filter output — Use <a href="guide/filter">angular filters</a> instead.</li>
-<li>Share code or state across controllers — Use <a href="guide/services">angular</a>
-services instead.</li>
+<li>Share code or state across controllers — Use <a href="guide/services">angular
+services</a> instead.</li>
 <li>Manage the life-cycle of other components (for example, to create service instances).</li>
 </ul>
 <h1 id="setting-up-the-initial-state-of-a-scope-object">Setting up the initial state of a <code>$scope</code> object</h1>
@@ -78,8 +78,8 @@ needed for a single view.</p>
 controllers into services and then using these services in Controllers via dependency injection.
 This is discussed in the <a href="guide/di">Dependency Injection</a> <a href="guide/services">Services</a> sections of this guide.</p>
 <h1 id="associating-controllers-with-angular-scope-objects">Associating Controllers with Angular Scope Objects</h1>
-<p>You can associate Controllers with scope objects implicitly via the <a href="api/ng/directive/ngController">ngController</a>
-directive or <a href="api/ngRoute/service/$route">$route service</a>.</p>
+<p>You can associate Controllers with scope objects implicitly via the <a href="api/ng/directive/ngController">ngController
+directive</a> or <a href="api/ngRoute/service/$route">$route service</a>.</p>
 <h2 id="simple-spicy-controller-example">Simple Spicy Controller Example</h2>
 <p>To illustrate further how Controller components work in Angular, let&#39;s create a little app with the
 following components:</p>
@@ -207,7 +207,7 @@ more information about scope inheritance.</p>
       name="app.js"
       language="js"
       type="js">
-      <pre><code>var myApp = angular.module(&#39;scopeInheritance&#39;, []);&#10;myApp.controller(&#39;MainController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.timeOfDay = &#39;morning&#39;;&#10;  $scope.name = &#39;Nikki&#39;;&#10;}]);&#10;myApp.controller(&#39;ChildController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.name = &#39;Mattie&#39;;&#10;}]);&#10;myApp.controller(&#39;GrandChildController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.timeOfDay = &#39;evening&#39;;&#10;  $scope.name = &#39;Gingerbreak Baby&#39;;&#10;}]);</code></pre>
+      <pre><code>var myApp = angular.module(&#39;scopeInheritance&#39;, []);&#10;myApp.controller(&#39;MainController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.timeOfDay = &#39;morning&#39;;&#10;  $scope.name = &#39;Nikki&#39;;&#10;}]);&#10;myApp.controller(&#39;ChildController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.name = &#39;Mattie&#39;;&#10;}]);&#10;myApp.controller(&#39;GrandChildController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.timeOfDay = &#39;evening&#39;;&#10;  $scope.name = &#39;Gingerbread Baby&#39;;&#10;}]);</code></pre>
     </div>
   
 

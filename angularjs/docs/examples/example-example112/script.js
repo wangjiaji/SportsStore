@@ -1,16 +1,17 @@
-  angular.module('myServiceModuleDI', []).
-    factory('notify', function($window) {
+  angular.
+   module('myServiceModule', []).
+    controller('MyController', ['$scope','notify', function ($scope, notify) {
+      $scope.callNotify = function(msg) {
+        notify(msg);
+      };
+    }]).
+   factory('notify', ['$window', function(win) {
       var msgs = [];
       return function(msg) {
         msgs.push(msg);
         if (msgs.length == 3) {
-          $window.alert(msgs.join("\n"));
+          win.alert(msgs.join("\n"));
           msgs = [];
         }
       };
-    }).
-    controller('MyController', function($scope, notify) {
-      $scope.callNotify = function(msg) {
-        notify(msg);
-      };
-    });
+    }]);

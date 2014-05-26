@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>AngluarJS Demo</title>
+        <script src="angularjs/angular.js"></script>
+        <script src="angularjs/i18n/angular-locale_fr-fr.js"></script>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
+        <script>
+            angular.module('exampleApp', [])
+                .controller('defaultCtrl', function ($scope, $http) {
+                    $scope.loadData = function () {
+                        $http.get('productData.json').success(function (data) {
+                            $scope.products = data;
+                        });
+                    };
+                });
+        </script>
+    </head>
+    <body ng-controller="defaultCtrl">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table table-striped table-bordered table-condensed">
+                    <thead>
+                        <tr><td>Name</td><td>Category</td><td>Expiry</td><td class="text-right">Price</td></tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-hide="products.length">
+                            <td colspan="3" class="text-center">No Data</td>
+                        </tr>
+
+                        <tr ng-repeat="p in products | orderBy:'price'">
+                            <td>{{p.name}}</td>
+                            <td>{{p.category}}</td>
+                            <td class="text-right">{{p.price | currency}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><button class="btn btn-primary" ng-click="loadData()">Load Data</button></p>
+            </div>
+        </div>
+    </body>
+</html>

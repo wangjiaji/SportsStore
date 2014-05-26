@@ -1,20 +1,62 @@
 // Meta data used by the AngularJS docs app
 angular.module('versionsData', [])
   .value('NG_VERSION', {
-  "raw": "v1.3.0-beta.7",
+  "raw": "v1.3.0-beta.10",
   "major": 1,
   "minor": 3,
   "patch": 0,
   "prerelease": [
     "beta",
-    7
+    10
   ],
   "build": [],
-  "version": "1.3.0-beta.7",
-  "codeName": "proper-attribution",
-  "full": "1.3.0-beta.7"
+  "version": "1.3.0-beta.10",
+  "codeName": "excessive-clarification",
+  "full": "1.3.0-beta.10"
 })
   .value('NG_VERSIONS', [
+  {
+    "raw": "v1.3.0-beta.10",
+    "major": 1,
+    "minor": 3,
+    "patch": 0,
+    "prerelease": [
+      "beta",
+      10
+    ],
+    "build": [],
+    "version": "1.3.0-beta.10",
+    "codeName": "excessive-clarification",
+    "full": "1.3.0-beta.10"
+  },
+  {
+    "raw": "v1.3.0-beta.9",
+    "major": 1,
+    "minor": 3,
+    "patch": 0,
+    "prerelease": [
+      "beta",
+      9
+    ],
+    "build": [],
+    "version": "1.3.0-beta.9",
+    "isStable": false,
+    "docsUrl": "http://code.angularjs.org/1.3.0-beta.9/docs"
+  },
+  {
+    "raw": "v1.3.0-beta.8",
+    "major": 1,
+    "minor": 3,
+    "patch": 0,
+    "prerelease": [
+      "beta",
+      8
+    ],
+    "build": [],
+    "version": "1.3.0-beta.8",
+    "isStable": false,
+    "docsUrl": "http://code.angularjs.org/1.3.0-beta.8/docs"
+  },
   {
     "raw": "v1.3.0-beta.7",
     "major": 1,
@@ -26,8 +68,8 @@ angular.module('versionsData', [])
     ],
     "build": [],
     "version": "1.3.0-beta.7",
-    "codeName": "proper-attribution",
-    "full": "1.3.0-beta.7"
+    "isStable": false,
+    "docsUrl": "http://code.angularjs.org/1.3.0-beta.7/docs"
   },
   {
     "raw": "v1.3.0-beta.6",

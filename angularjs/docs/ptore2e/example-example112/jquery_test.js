@@ -1,6 +1,6 @@
 describe("services", function() {
   beforeEach(function() {
-    browser.get("./examples/example-example111/index-jquery.html");
+    browser.get("./examples/example-example112/index-jquery.html");
   });
 
   it('should test service', function() {

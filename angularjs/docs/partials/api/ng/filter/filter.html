@@ -119,15 +119,18 @@ the predicate returned true for.</p>
     determining if the expected value (from the filter expression) and actual value (from
     the object in the array) should be considered a match.</p>
 <p>  Can be one of:</p>
-<pre><code>- `function(actual, expected)`:
-  The function will be given the object value and the predicate value to compare and
-  should return true if the item should be included in filtered result.
-
-- `true`: A shorthand for `function(actual, expected) { return angular.equals(expected, actual)}`.
-  this is essentially strict comparison of expected and actual.
-
-- `false|undefined`: A short hand for a function which will look for a substring match in case
-  insensitive way.</code></pre>
+<ul>
+<li><p><code>function(actual, expected)</code>:
+The function will be given the object value and the predicate value to compare and
+should return true if the item should be included in filtered result.</p>
+</li>
+<li><p><code>true</code>: A shorthand for <code>function(actual, expected) { return angular.equals(expected, actual)}</code>.
+this is essentially strict comparison of expected and actual.</p>
+</li>
+<li><p><code>false|undefined</code>: A short hand for a function which will look for a substring match in case
+insensitive way.</p>
+</li>
+</ul>
 
         
       </td>

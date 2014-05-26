@@ -22,7 +22,7 @@ For a more in-depth explanation, see the <a href="tutorial/">tutorial</a>.</p>
 </tr>
 <tr>
 <td><a href="guide/concepts#model">Model</a></td>
-<td>the data that is shown to the user and with which the user interacts</td>
+<td>the data shown to the user in the view and with which the user interacts</td>
 </tr>
 <tr>
 <td><a href="guide/concepts#scope">Scope</a></td>
@@ -54,7 +54,7 @@ For a more in-depth explanation, see the <a href="tutorial/">tutorial</a>.</p>
 </tr>
 <tr>
 <td><a href="guide/concepts#di">Dependency Injection</a></td>
-<td>Creates and wires objects / functions</td>
+<td>Creates and wires objects and functions</td>
 </tr>
 <tr>
 <td><a href="guide/concepts#injector">Injector</a></td>
@@ -62,7 +62,7 @@ For a more in-depth explanation, see the <a href="tutorial/">tutorial</a>.</p>
 </tr>
 <tr>
 <td><a href="guide/concepts#module">Module</a></td>
-<td>configures the Injector</td>
+<td>a container for the different parts of an app including controllers, services, filters, directives which configures the Injector</td>
 </tr>
 <tr>
 <td><a href="guide/concepts#service">Service</a></td>
@@ -245,7 +245,7 @@ from the web, e.g. by calling the Yahoo Finance API, without changing the contro
 <p><img class="pull-right" style="padding-left: 3em; padding-bottom: 1em;" src="img/guide/concepts-module-service.png"></p>
 <p>What changed?
 We moved the <code>convertCurrency</code> function and the definition of the existing currencies
-into the new file <code>finance.js</code>. But how does the controller
+into the new file <code>finance2.js</code>. But how does the controller
 get a hold of the now separated function?</p>
 <p>This is where <a name="di">&quot;<a href="guide/di">Dependency Injection</a>&quot;</a> comes into play.
 Dependency Injection (DI) is a software design pattern that

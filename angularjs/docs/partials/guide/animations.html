@@ -261,7 +261,7 @@ The table below explains in detail which animation events are triggered</p>
 <p>Animations within custom directives can also be established by injecting <code>$animate</code> directly into your directive and
 making calls to it when needed.</p>
 <pre><code class="lang-js">myModule.directive(&#39;my-directive&#39;, [&#39;$animate&#39;, function($animate) {
-  return function(element, scope, attrs) {
+  return function(scope, element, attrs) {
     element.on(&#39;click&#39;, function() {
       if(element.hasClass(&#39;clicked&#39;)) {
         $animate.removeClass(element, &#39;clicked&#39;);

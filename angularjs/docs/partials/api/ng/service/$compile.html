@@ -52,7 +52,6 @@ or just the <code>postLink</code> function (all other properties will have the d
       template: &#39;&lt;div&gt;&lt;/div&gt;&#39;, // or // function(tElement, tAttrs) { ... },
       // or
       // templateUrl: &#39;directive.html&#39;, // or // function(tElement, tAttrs) { ... },
-      replace: false,
       transclude: false,
       restrict: &#39;A&#39;,
       scope: false,
@@ -185,6 +184,18 @@ declaration style. If omitted, the default (attributes only) is used.</p>
 <li><code>C</code> - Class: <code>&lt;div class=&quot;my-directive: exp;&quot;&gt;&lt;/div&gt;</code></li>
 <li><code>M</code> - Comment: <code>&lt;!-- directive: my-directive exp --&gt;</code></li>
 </ul>
+<h4 id="-type-"><code>type</code></h4>
+<p>String representing the document type used by the markup. This is useful for templates where the root
+node is non-HTML content (such as SVG or MathML). The default value is &quot;html&quot;.</p>
+<ul>
+<li><code>html</code> - All root template nodes are HTML, and don&#39;t need to be wrapped. Root nodes may also be
+top-level elements such as <code>&lt;svg&gt;</code> or <code>&lt;math&gt;</code>.</li>
+<li><code>svg</code> - The template contains only SVG content, and must be wrapped in an <code>&lt;svg&gt;</code> node prior to
+processing.</li>
+<li><code>math</code> - The template contains only MathML content, and must be wrapped in an <code>&lt;math&gt;</code> node prior to
+processing.</li>
+</ul>
+<p>If no <code>type</code> is specified, then the type is considered to be html.</p>
 <h4 id="-template-"><code>template</code></h4>
 <p>replace the current element with the contents of the HTML. The replacement process
 migrates all of the attributes / classes from the old element to the new one. See the
@@ -199,7 +210,7 @@ is loaded.</p>
 <p>You can specify <code>templateUrl</code> as a string representing the URL or as a function which takes two
 arguments <code>tElement</code> and <code>tAttrs</code> (described in the <code>compile</code> function api below) and returns
 a string value representing the url.  In either case, the template URL is passed through <a href="api/ng.$sce#getTrustedResourceUrl">$sce.getTrustedResourceUrl</a>.</p>
-<h4 id="-replace-"><code>replace</code></h4>
+<h4 id="-replace-deprecated-will-be-removed-in-next-major-release-"><code>replace</code> ([<em>DEPRECATED</em>!], will be removed in next major release)</h4>
 <p>specify where the template should be inserted. Defaults to <code>false</code>.</p>
 <ul>
 <li><code>true</code> - the template will replace the current element.</li>
@@ -219,10 +230,7 @@ be bound to the parent (pre-<code>isolate</code>) scope.</p>
 <h4 id="-compile-"><code>compile</code></h4>
 <pre><code class="lang-js">  function compile(tElement, tAttrs, transclude) { ... }</code></pre>
 <p>The compile function deals with transforming the template DOM. Since most directives do not do
-template transformation, it is not used often. Examples that require compile functions are
-directives that transform template DOM, such as <a href="api/ng.directive:ngRepeat">ngRepeat</a>, or load the contents
-asynchronously, such as <a href="api/ngRoute/directive/ngView">ngView</a>. The
-compile function takes the following arguments.</p>
+template transformation, it is not used often. The compile function takes the following arguments:</p>
 <ul>
 <li><p><code>tElement</code> - template element - The element where the directive has been declared. It is
 safe to do template transformation on the element and child elements only.</p>

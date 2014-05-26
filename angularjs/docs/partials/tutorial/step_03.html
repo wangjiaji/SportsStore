@@ -114,43 +114,45 @@ To rerun the test suite, execute <code>npm run protractor</code> again.</p>
 
 
 <h1 id="experiments">Experiments</h1>
-<ul>
-<li><p>Display the current value of the <code>query</code> model by adding a <code>{{query}}</code> binding into the
+<h3 id="display-current-query">Display Current Query</h3>
+<p>Display the current value of the <code>query</code> model by adding a <code>{{query}}</code> binding into the
 <code>index.html</code> template, and see how it changes when you type in the input box.</p>
+<h3 id="display-query-in-title">Display Query in Title</h3>
+<p>Let&#39;s see how we can get the current value of the <code>query</code> model to appear in the HTML page title.</p>
+<ul>
+<li><p>Add the following end-to-end test into the <code>describe</code> block within <code>test/e2e/scenarios.js</code>:</p>
+<pre><code class="lang-js">  it(&#39;should display the current filter value in the title bar&#39;, function() {
+
+    expect(browser.getTitle()).toMatch(/Google Phone Gallery:\s*$/);
+
+    element(by.model(&#39;query&#39;)).sendKeys(&#39;nexus&#39;);
+
+    expect(browser.getTitle()).toMatch(/Google Phone Gallery: nexus$/);
+  });</code></pre>
+<p>Run protractor (<code>npm run protractor</code>) to see this test fail.</p>
 </li>
-<li><p>Let&#39;s see how we can get the current value of the <code>query</code> model to appear in the HTML page title.</p>
-<p>You might think you could just add the <code>{{query}}</code> to the title tag element as follows:</p>
-<pre><code>    &lt;title&gt;Google Phone Gallery: {{query}}&lt;/title&gt;</code></pre>
+</ul>
+<ul>
+<li><p>You might think you could just add the <code>{{query}}</code> to the title tag element as follows:</p>
+<pre><code>  &lt;title&gt;Google Phone Gallery: {{query}}&lt;/title&gt;</code></pre>
 <p>However, when you reload the page, you won&#39;t see the expected result. This is because the &quot;query&quot;
-model lives in the scope, defined by the <code>ng-controller=&quot;PhoneListCtrl&quot;</code> directive, on the body element:</p>
+model lives in the scope, defined by the <code>ng-controller=&quot;PhoneListCtrl&quot;</code> directive, on the body
+element:</p>
 <pre><code>    &lt;body ng-controller=&quot;PhoneListCtrl&quot;&gt;</code></pre>
 <p>If you want to bind to the query model from the <code>&lt;title&gt;</code> element, you must <strong>move</strong> the
 <code>ngController</code> declaration to the HTML element because it is the common parent of both the body
 and title elements:</p>
 <pre><code>    &lt;html ng-app=&quot;phonecatApp&quot; ng-controller=&quot;PhoneListCtrl&quot;&gt;</code></pre>
 <p>Be sure to <strong>remove</strong> the <code>ng-controller</code> declaration from the body element.</p>
-<p>While using double curlies works fine within the title element, you might have noticed that
-for a split second they are actually displayed to the user while the page is loading. A better
-solution would be to use the <a href="api/ng/directive/ngBind">ngBind</a> or <a href="api/ng/directive/ngBindTemplate">ngBindTemplate</a> directives, which are invisible to the user while the page is loading:</p>
-<pre><code>    &lt;title ng-bind-template=&quot;Google Phone Gallery: {{query}}&quot;&gt;Google Phone Gallery&lt;/title&gt;</code></pre>
 </li>
-<li><p>Add the following end-to-end test into the <code>describe</code> block within <code>test/e2e/scenarios.js</code>:</p>
-<pre><code class="lang-js">  it(&#39;should display the current filter value within an element with id &quot;status&quot;&#39;,
-      function() {
-    var statusElement = element(by.id(&#39;status&#39;));
-    expect(statusElement.getText()).toMatch(/Current filter:\s*$/);
-
-    element(by.model(&#39;query&#39;)).sendKeys(&#39;nexus&#39;);
-
-    expect(statusElement.getText()).toMatch(/Current filter: nexus\s*$/);
-
-    //alternative version of the last assertion that tests just the value of the binding
-    expect(element(by.binding(&#39;query&#39;)).getText()).toMatch(/Current filter: nexus\s*$/);
-  });</code></pre>
-<p>Re-run <code>npm run protractor</code> to see the test fail. To make the test pass, edit the <code>index.html</code>
-template to add a <code>div</code> or <code>p</code> element with <code>id</code> <code>&quot;status&quot;</code> and content with the <code>query</code> binding,
-prefixed by &quot;Current filter:&quot;. For instance:</p>
-<pre><code>    &lt;div id=&quot;status&quot;&gt;Current filter: {{query}}&lt;/div&gt;</code></pre>
+<li><p>Re-run <code>npm run protractor</code> to see the test now pass.</p>
+</li>
+<li><p>While using double curlies works fine within the title element, you might have noticed that
+for a split second they are actually displayed to the user while the page is loading. A better
+solution would be to use the <a href="api/ng/directive/ngBind">ngBind</a> or
+<a href="api/ng/directive/ngBindTemplate">ngBindTemplate</a> directives, which are invisible to the user
+while the page is loading:</p>
+<pre><code>  &lt;title ng-bind-template=&quot;Google Phone Gallery: {{query}}&quot;&gt;Google Phone Gallery&lt;/title&gt;</code></pre>
 </li>
 </ul>
 <h1 id="summary">Summary</h1>

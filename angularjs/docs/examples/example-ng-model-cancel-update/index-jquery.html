@@ -20,11 +20,11 @@
      <p>Now see what happens if you start typing then press the Escape key</p>
 
     <form name="myForm" ng-model-options="{ updateOn: 'blur' }">
-      <p>With $cancelUpdate()</p>
+      <p>With $rollbackViewValue()</p>
       <input name="myInput1" ng-model="myValue" ng-keydown="resetWithCancel($event)"><br/>
       myValue: "{{ myValue }}"
 
-      <p>Without $cancelUpdate()</p>
+      <p>Without $rollbackViewValue()</p>
       <input name="myInput2" ng-model="myValue" ng-keydown="resetWithoutCancel($event)"><br/>
       myValue: "{{ myValue }}"
     </form>

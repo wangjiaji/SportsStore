@@ -2,8 +2,8 @@
 
 
 <h1 id="services">Services</h1>
-<p>Angular services are substitutable objects that are wired together using <a href="guide/di">dependency</a>
-injection (DI). You can use services to organize and share code across your app.</p>
+<p>Angular services are substitutable objects that are wired together using <a href="guide/di">dependency
+injection (DI)</a>. You can use services to organize and share code across your app.</p>
 <p>Angular services are:</p>
 <ul>
 <li>Lazily instantiated – Angular only instantiates a service when an application component depends
@@ -26,11 +26,11 @@ subsystem takes care of the rest.</p>
 <p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example111')" class="btn pull-right">
+  <a ng-click="openPlunkr('examples/example-example112')" class="btn pull-right">
     <i class="glyphicon glyphicon-edit">&nbsp;</i>
     Edit in Plunker</a>
   <div class="runnable-example"
-      path="examples/example-example111"
+      path="examples/example-example112"
       module="myServiceModule">
 
    
@@ -56,7 +56,7 @@ subsystem takes care of the rest.</p>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example111/index.html" name="example-example111"></iframe>
+    <iframe class="runnable-example-frame" src="examples/example-example112/index.html" name="example-example112"></iframe>
   </div>
 </div>
 
@@ -67,8 +67,8 @@ subsystem takes care of the rest.</p>
 </div>
 
 <h3 id="explicit-dependency-injection">Explicit Dependency Injection</h3>
-<p>A component should explicitly define its dependencies using one of the <a href="guide/di">injection</a>
-annotation methods:</p>
+<p>A component should explicitly define its dependencies using one of the <a href="guide/di">injection
+annotation</a> methods:</p>
 <ol>
 <li><p>Inline array injection annotation (preferred):</p>
 <pre><code class="lang-js">myModule.controller(&#39;MyController&#39;, [&#39;$location&#39;, function($location) { ... }]);</code></pre>
@@ -90,11 +90,11 @@ injection of <code>$window</code>, <code>$scope</code>, and our <code>notify</co
 <p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example112')" class="btn pull-right">
+  <a ng-click="openPlunkr('examples/example-example113')" class="btn pull-right">
     <i class="glyphicon glyphicon-edit">&nbsp;</i>
     Edit in Plunker</a>
   <div class="runnable-example"
-      path="examples/example-example112"
+      path="examples/example-example113"
       module="myServiceModuleDI">
 
    
@@ -113,14 +113,20 @@ injection of <code>$window</code>, <code>$scope</code>, and our <code>notify</co
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example112/index.html" name="example-example112"></iframe>
+    <iframe class="runnable-example-frame" src="examples/example-example113/index.html" name="example-example113"></iframe>
   </div>
 </div>
 
 </p>
 <div class="alert alert-danger">
-<strong>Careful:</strong> If you plan to <a href="http://en.wikipedia.org/wiki/Minification_(programming">minify</a> your code,
-your variable names will get renamed unless you use one of the annotation techniques above.
+<strong>Careful:</strong> If you plan to <a href="http://en.wikipedia.org/wiki/Minification_(programming">minify</a>) your
+code, your variable names will get renamed unless you use one of the annotation techniques above.
+</div>
+
+<div class="alert alert-info">
+  If you use a tool like <a href="https://github.com/btford/ngmin#ngmin">ngmin</a> in your workflow you can
+  use implicit dependency notation within your codebase and let <strong>ngmin</strong> automatically convert such
+  injectable functions to the array notation prior to minifying.
 </div>
 
 

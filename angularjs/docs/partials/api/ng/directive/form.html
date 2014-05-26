@@ -2,7 +2,7 @@
 
 
 
-<a href='http://github.com/angular/angular.js/tree/master/src/ng/directive/form.js#L227' class='view-source pull-right btn btn-primary'>
+<a href='http://github.com/angular/angular.js/tree/master/src/ng/directive/form.js#L244' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -67,6 +67,9 @@ doesn&#39;t trigger submit</li>
 hitting enter in any of the input fields will trigger the click handler on the <em>first</em> button or
 input[type=submit] (<code>ngClick</code>) <em>and</em> a submit handler on the enclosing form (<code>ngSubmit</code>)</li>
 </ul>
+<p>Any pending <code>ngModelOptions</code> changes will take place immediately when an enclosing form is
+submitted. Note that <code>ngClick</code> events will occur before the model is updated. Use <code>ngSubmit</code>
+to have access to the updated model.</p>
 
 </div>
 

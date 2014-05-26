@@ -573,7 +573,7 @@ iterations exceeds 10.</p>
 <a href="api/ng/directive/ngController">controllers</a> or in
 <a href="api/ng/provider/$compileProvider#directive">directives</a>.
 Instead, you should call <a href="api/ng/type/$rootScope.Scope#$apply">$apply()</a> (typically from within
-a <a href="api/ng/provider/$compileProvider#directive">directives</a>), which will force a <code>$digest()</code>.</p>
+a <a href="api/ng/provider/$compileProvider#directive">directive</a>), which will force a <code>$digest()</code>.</p>
 <p>If you want to be notified whenever <code>$digest()</code> is called,
 you can register a <code>watchExpression</code> function with
 <a href="api/ng/type/$rootScope.Scope#$watch">$watch()</a> with no <code>listener</code>.</p>
@@ -876,7 +876,8 @@ passed into the listener has the following attributes:</p>
 <ul>
 <li><code>targetScope</code> - <code>{Scope}</code>: the scope on which the event was <code>$emit</code>-ed or
 <code>$broadcast</code>-ed.</li>
-<li><code>currentScope</code> - <code>{Scope}</code>: the current scope which is handling the event.</li>
+<li><code>currentScope</code> - <code>{Scope}</code>: the scope that is currently handling the event. Once the
+event propagates through the scope hierarchy, this property is set to null.</li>
 <li><code>name</code> - <code>{string}</code>: name of the event.</li>
 <li><code>stopPropagation</code> - <code>{function=}</code>: calling <code>stopPropagation</code> function will cancel
 further event propagation (available only for events that were <code>$emit</code>-ed).</li>
@@ -1125,7 +1126,8 @@ clean up DOM bindings before an element is removed from the DOM.</p>
     </div>
     <div class="inline">
       <h4>Target:</h4>
-      <div class="target">scope being destroyed</div>
+      <div class="target">scope being destroyed
+</div>
     </div>
     </li>
   </ul>

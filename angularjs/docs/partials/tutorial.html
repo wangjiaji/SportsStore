@@ -72,6 +72,8 @@ download much smaller and faster.
 <p>You can download a Node.js installer for your operating system from <a href="http://nodejs.org/download/">http://nodejs.org/download/</a>.</p>
 <p>Check the version of Node.js that you have installed by running the following command:</p>
 <pre><code>node --version</code></pre>
+<p>Or in Debian based distributions:</p>
+<pre><code>nodejs --version</code></pre>
 <div class="alert alert-info">If you need to run a different versions of node.js
   in your local environment, consider installing
   <a href="https://github.com/creationix/nvm" title="Node Version Manager Github Repo link">
@@ -86,10 +88,10 @@ download much smaller and faster.
 <li><a href="http://bower.io/">Bower</a> - client-side code package manager</li>
 <li><a href="https://github.com/nodeapps/http-server">Http-Server</a> - simple local static web server</li>
 <li><a href="https://github.com/karma-runner/karma">Karma</a> - unit test runner</li>
-<li><a href="https://github.com/angular/protractor">Protractor</a> - end 2 end test runner</li>
+<li><a href="https://github.com/angular/protractor">Protractor</a> - end to end (E2E) test runner</li>
 </ul>
 <p>Running <code>npm install</code> will also automatically use bower to download the Angular framework into the
-<code>bower_components</code> directory.</p>
+<code>app/bower_components</code> directory.</p>
 <div class="alert alert-info">
   Note the angular-phonecat project is setup to install and run these utilities via npm scripts.
   This means that you do not have to have any of these utilities installed globally on your system
@@ -101,7 +103,7 @@ tasks that you will need while developing:</p>
 <ul>
 <li><code>npm start</code> : start a local development web-server</li>
 <li><code>npm test</code> : start the Karma unit test runner</li>
-<li><code>npm run protractor</code> : run the Protractor end 2 end tests</li>
+<li><code>npm run protractor</code> : run the Protractor end to end (E2E) tests</li>
 <li><code>npm run update-webdriver</code> : install the drivers needed by Protractor</li>
 </ul>
 <h3 id="install-helper-tools-optional-">Install Helper Tools (optional)</h3>

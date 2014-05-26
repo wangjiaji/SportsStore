@@ -2,7 +2,7 @@
 
 
 
-<a href='http://github.com/angular/angular.js/tree/master/src/ng/http.js#L173' class='view-source pull-right btn btn-primary'>
+<a href='http://github.com/angular/angular.js/tree/master/src/ng/http.js#L146' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -156,14 +156,14 @@ adding them to the <code>$httpProvider.interceptors</code> array. The factory is
 injected with dependencies (if specified) and returns the interceptor.</p>
 <p>There are two kinds of interceptors (and two kinds of rejection interceptors):</p>
 <ul>
-<li><code>request</code>: interceptors get called with http <code>config</code> object. The function is free to
-modify the <code>config</code> or create a new one. The function needs to return the <code>config</code>
-directly or as a promise.</li>
+<li><code>request</code>: interceptors get called with a http <code>config</code> object. The function is free to
+modify the <code>config</code> object or create a new one. The function needs to return the <code>config</code>
+object directly, or a promise containing the <code>config</code> or a new <code>config</code> object.</li>
 <li><code>requestError</code>: interceptor gets called when a previous interceptor threw an error or
 resolved with a rejection.</li>
 <li><code>response</code>: interceptors get called with http <code>response</code> object. The function is free to
-modify the <code>response</code> or create a new one. The function needs to return the <code>response</code>
-directly or as a promise.</li>
+modify the <code>response</code> object or create a new one. The function needs to return the <code>response</code>
+object directly, or as a promise containing the <code>response</code> or a new <code>response</code> object.</li>
 <li><code>responseError</code>: interceptor gets called when a previous interceptor threw an error or
 resolved with a rejection.</li>
 </ul>
@@ -173,7 +173,7 @@ resolved with a rejection.</li>
       // optional method
       &#39;request&#39;: function(config) {
         // do something on success
-        return config || $q.when(config);
+        return config;
       },
 
       // optional method
@@ -190,7 +190,7 @@ resolved with a rejection.</li>
       // optional method
       &#39;response&#39;: function(response) {
         // do something on success
-        return response || $q.when(response);
+        return response;
       },
 
       // optional method
@@ -218,42 +218,6 @@ resolved with a rejection.</li>
          // same as above
       }
     };
-  });</code></pre>
-<h1 id="response-interceptors-deprecated-">Response interceptors (DEPRECATED)</h1>
-<p>Before you start creating interceptors, be sure to understand the
-<a href="api/ng/service/$q">$q and deferred/promise APIs</a>.</p>
-<p>For purposes of global error handling, authentication or any kind of synchronous or
-asynchronous preprocessing of received responses, it is desirable to be able to intercept
-responses for http requests before they are handed over to the application code that
-initiated these requests. The response interceptors leverage the <a href="api/ng/service/$q">promise apis</a> to fulfil this need for both synchronous and asynchronous preprocessing.</p>
-<p>The interceptors are service factories that are registered with the $httpProvider by
-adding them to the <code>$httpProvider.responseInterceptors</code> array. The factory is called and
-injected with dependencies (if specified) and returns the interceptor  — a function that
-takes a <a href="api/ng/service/$q">promise</a> and returns the original or a new promise.</p>
-<pre><code class="lang-js">  // register the interceptor as a service
-  $provide.factory(&#39;myHttpInterceptor&#39;, function($q, dependency1, dependency2) {
-    return function(promise) {
-      return promise.then(function(response) {
-        // do something on success
-        return response;
-      }, function(response) {
-        // do something on error
-        if (canRecover(response)) {
-          return responseOrNewPromise
-        }
-        return $q.reject(response);
-      });
-    }
-  });
-
-  $httpProvider.responseInterceptors.push(&#39;myHttpInterceptor&#39;);
-
-
-  // register the interceptor via an anonymous factory
-  $httpProvider.responseInterceptors.push(function($q, dependency1, dependency2) {
-    return function(promise) {
-      // same as above
-    }
   });</code></pre>
 <h1 id="security-considerations">Security Considerations</h1>
 <p>When designing web applications, consider security threats from:</p>

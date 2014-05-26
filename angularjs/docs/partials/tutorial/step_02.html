@@ -25,7 +25,7 @@ view.</p>
 <pre><code class="lang-html">&lt;html ng-app=&quot;phonecatApp&quot;&gt;
 &lt;head&gt;
   ...
-  &lt;script src=&quot;../bower_components/angular/angular.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;bower_components/angular/angular.js&quot;&gt;&lt;/script&gt;
   &lt;script src=&quot;js/controllers.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body ng-controller=&quot;PhoneListCtrl&quot;&gt;
@@ -178,7 +178,7 @@ and will rerun the tests for you. Now isn&#39;t that sweet?</li>
 <pre><code>    &lt;p&gt;Hello, {{name}}!&lt;/p&gt;</code></pre>
 <p>Refresh your browser and verify that it says &quot;Hello, World!&quot;.</p>
 </li>
-<li><p>Update the unit test for the controller in ./tests/unit/controllersSpec.js to reflect the previous change. For example by adding:</p>
+<li><p>Update the unit test for the controller in ./test/unit/controllersSpec.js to reflect the previous change. For example by adding:</p>
 <pre><code>    expect(scope.name).toBe(&#39;World&#39;);</code></pre>
 </li>
 <li><p>Create a repeater in <code>index.html</code> that constructs a simple table:</p>
@@ -192,7 +192,7 @@ and will rerun the tests for you. Now isn&#39;t that sweet?</li>
       &lt;tr ng-repeat=&quot;i in [0, 1, 2, 3, 4, 5, 6, 7]&quot;&gt;&lt;td&gt;{{i+1}}&lt;/td&gt;&lt;/tr&gt;
     &lt;/table&gt;</code></pre>
 </li>
-<li><p>Make the unit test fail by changing the <code>toBe(3)</code> statement to <code>toBe(4)</code>.</p>
+<li><p>Make the unit test fail by changing <code>expect(scope.phones.length).toBe(3)</code> to instead use <code>toBe(4)</code>.</p>
 </li>
 </ul>
 <h1 id="summary">Summary</h1>

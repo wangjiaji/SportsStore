@@ -44,8 +44,8 @@ angular.module('directives', [])
     restrict: 'E',
     terminal: true,
     compile: function(element) {
-      var linenums = element.hasClass('linenum') || element.parent()[0].nodeName === 'PRE';
-      var match = /lang-(\S)+/.exec(element.className);
+      var linenums = element.hasClass('linenum');// || element.parent()[0].nodeName === 'PRE';
+      var match = /lang-(\S+)/.exec(element[0].className);
       var lang = match && match[1];
       var html = element.html();
       element.html(window.prettyPrintOne(html, lang, linenums));
@@ -286,7 +286,7 @@ angular.module('examples', [])
         exampleName = exampleNameParts.join(' - ');
 
         angular.forEach(manifest.files, function(filename) {
-          filePromises.push($http.get(exampleFolder + '/' + filename)
+          filePromises.push($http.get(exampleFolder + '/' + filename, { transformResponse: [] })
             .then(function(response) {
 
               // The manifests provide the production index file but Plunkr wants
@@ -353,7 +353,7 @@ angular.module('search', [])
   }
 
   $scope.search = function(q) {
-    var MIN_SEARCH_LENGTH = 3;
+    var MIN_SEARCH_LENGTH = 2;
     if(q.length >= MIN_SEARCH_LENGTH) {
       var results = docsSearch(q);
       var totalAreas = 0;
@@ -380,7 +380,7 @@ angular.module('search', [])
       }
     }
     if(result) {
-      $location.path(result.url);
+      $location.path(result.path);
       $scope.hideResults();
     }
   };

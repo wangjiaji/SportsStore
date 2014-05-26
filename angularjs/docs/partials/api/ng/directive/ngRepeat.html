@@ -176,7 +176,7 @@ is specified the ng-repeat associates elements by identity in the collection. It
 more than one tracking function to resolve to the same key. (This would mean that two distinct objects are
 mapped to the same DOM element, which is not possible.)  Filters should be applied to the expression,
 before specifying a tracking expression.</p>
-<p>For example: <code>item in items</code> is equivalent to `item in items track by $id(item)&#39;. This implies that the DOM elements
+<p>For example: <code>item in items</code> is equivalent to <code>item in items track by $id(item)</code>. This implies that the DOM elements
 will be associated by item identity in the array.</p>
 <p>For example: <code>item in items track by $id(item)</code>. A built in <code>$id()</code> function can be used to assign a unique
 <code>$$hashKey</code> property to each item in the array. This property is then used as a key to associated DOM elements

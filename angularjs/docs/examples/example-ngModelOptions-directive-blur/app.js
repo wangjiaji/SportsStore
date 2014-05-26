@@ -3,7 +3,7 @@
 
     $scope.cancel = function (e) {
       if (e.keyCode == 27) {
-        $scope.userForm.userName.$cancelUpdate();
+        $scope.userForm.userName.$rollbackViewValue();
       }
     };
   }

@@ -19,7 +19,7 @@
       <input type="text" name="userName"
              ng-model="user.name"
              ng-model-options="{ debounce: 1000 }" />
-      <button ng-click="userForm.userName.$cancelUpdate(); user.name=''">Clear</button><br />
+      <button ng-click="userForm.userName.$rollbackViewValue(); user.name=''">Clear</button><br />
     </form>
     <pre>user.name = <span ng-bind="user.name"></span></pre>
   </div>

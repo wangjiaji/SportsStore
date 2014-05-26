@@ -101,7 +101,7 @@ function declaration and extracting the parameter names. In the above example <c
 rename the method parameter names. This makes this way of annotating only useful for
 <a href="http://www.pretotyping.org/">pretotyping</a>, and demo applications.</p>
 <h3 id="-inject-property-annotation"><code>$inject</code> Property Annotation</h3>
-<p>To allow the minifers to rename the function parameters and still be able to inject right services,
+<p>To allow the minifiers to rename the function parameters and still be able to inject right services,
 the function needs to be annotated with the <code>$inject</code> property. The <code>$inject</code> property is an array
 of service names to inject.</p>
 <pre><code class="lang-js">var MyController = function(renamed$scope, renamedGreeter) {
@@ -148,7 +148,7 @@ dependencies.</p>
 <li><p>The <code>run</code> and <code>config</code> methods accept a function, which can also be injected with &quot;service&quot;
 components as dependencies.</p>
 </li>
-<li><p>Controllers are defined by an constructor function, which can be injected with any of the &quot;service&quot;
+<li><p>Controllers are defined by a constructor function, which can be injected with any of the &quot;service&quot;
 components as dependencies, but they can also be provided with special dependencies. See &quot;DI in
 Controllers&quot; below.</p>
 </li>
@@ -195,7 +195,7 @@ application. For example, there would be one instance for every <code>ng-control
 <p>Moreover, additional dependencies are made available to Controllers:</p>
 <ul>
 <li><a href="guide/scope"><code>$scope</code></a>: Controllers are always associated with a point in the DOM and so are provided with
-access to the <a href="guide/scope">scope</a> at that point. Other components, such as servies only have access to the
+access to the <a href="guide/scope">scope</a> at that point. Other components, such as services only have access to the
 singleton <a href="api/ng/service/$rootScope"><code>$rootScope</code></a> service.</li>
 <li><a href="api/ngRoute/service/$route"><code>$route</code></a> resolves: If a controller is instantiated as part of a route, then any values that
 are resolved as part of the route are made available for injection into the controller.</li>

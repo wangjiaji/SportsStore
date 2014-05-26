@@ -48,7 +48,7 @@ in our layout template. Additionally, we also need to load the <code>angular-res
 contains the <a href="api/ngResource">ngResource</a> module:</p>
 <p><strong><code>app/index.html</code>.</strong></p>
 <pre><code class="lang-html">...
-  &lt;script src=&quot;../bower_components/angular-resource/angular-resource.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;bower_components/angular-resource/angular-resource.js&quot;&gt;&lt;/script&gt;
   &lt;script src=&quot;js/services.js&quot;&gt;&lt;/script&gt;
 ...</code></pre>
 <h2 id="service">Service</h2>
@@ -149,7 +149,7 @@ ignores methods.</p>
           respond([{name: &#39;Nexus S&#39;}, {name: &#39;Motorola DROID&#39;}]);
 
       scope = $rootScope.$new();
-      ctrl = $controller(PhoneListCtrl, {$scope: scope});
+      ctrl = $controller(&#39;PhoneListCtrl&#39;, {$scope: scope});
     }));
 
 
@@ -184,7 +184,7 @@ ignores methods.</p>
 
       $routeParams.phoneId = &#39;xyz&#39;;
       scope = $rootScope.$new();
-      ctrl = $controller(PhoneDetailCtrl, {$scope: scope});
+      ctrl = $controller(&#39;PhoneDetailCtrl&#39;, {$scope: scope});
     }));
 
 

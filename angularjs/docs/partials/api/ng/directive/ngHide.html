@@ -26,10 +26,10 @@ the <code>ng-hide</code> CSS class onto the element. The <code>.ng-hide</code> C
 in AngularJS and sets the display style to none (using an !important flag).
 For CSP mode please add <code>angular-csp.css</code> to your html file (see <a href="api/ng/directive/ngCsp">ngCsp</a>).</p>
 <pre><code class="lang-html">&lt;!-- when $scope.myValue is truthy (element is hidden) --&gt;
-&lt;div ng-hide=&quot;myValue&quot;&gt;&lt;/div&gt;
+&lt;div ng-hide=&quot;myValue&quot; class=&quot;ng-hide&quot;&gt;&lt;/div&gt;
 
 &lt;!-- when $scope.myValue is falsy (element is visible) --&gt;
-&lt;div ng-hide=&quot;myValue&quot; class=&quot;ng-hide&quot;&gt;&lt;/div&gt;</code></pre>
+&lt;div ng-hide=&quot;myValue&quot;&gt;&lt;/div&gt;</code></pre>
 <p>When the ngHide expression evaluates to true then the .ng-hide CSS class is added to the class attribute
 on the element causing it to become hidden. When false, the ng-hide CSS class is removed
 from the element causing the element not to appear hidden.</p>

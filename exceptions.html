@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>Exceptions</title>
+        <script src="angularjs/jquery.js"></script>
+        <script src="angularjs/angular.js"></script>
+        <script src="angularjs/angular-sanitize.js"></script>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
+        <script>
+            angular.module('exampleApp', ['ngSanitize'])
+                .controller('defaultCtrl', function ($scope, $sce) {
+                    $scope.dangerousData = '<p>This is <b onmouseover=alert("Attack")>dangerous</b> data</p>';
+
+                    $scope.$watch('dangerousData', function (newVal) {
+                        $scope.htmlData = $sce.trustAsHtml(newVal);
+                        console.log($scope.htmlData);
+                    });
+                });
+        </script>
+    </head>
+    <body ng-controller="defaultCtrl">
+        <div class="well">
+            <p><input class="form-control" ng-model="dangerousData" /></p>
+            <p ng-bind-html="htmlData"></p>
+        </div>
+    </body>
+</html>
