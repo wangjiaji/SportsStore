@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>AngluarJS Demo</title>
+        <script src="angularjs/angular.js"></script>
+        <script src="angularjs/angular-resource.js"></script>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
+        <script src="products.js"></script>
+    </head>
+    <body ng-controller="defaultCtrl">
+        <div class="panel panel-primary">
+           <h3 class="panel-heading">Products</h3>
+           <ng-include src="'tableView.html'" ng-show="displayMode === 'list'"></ng-include>
+           <ng-include src="'editorView.html'" ng-show="displayMode === 'edit'"></ng-include>
+        </div>
+    </body>
+</html>

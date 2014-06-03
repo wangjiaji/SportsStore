@@ -22,24 +22,14 @@
                     };
                 })
                 .directive('unorderedList', function () {
-                    return function (scope, element, attrs) {
-                        var data = scope[attrs['unorderedList']];
-                        var propertyExpression = attrs['listProperty'];
-
-                        if (angular.isArray(data)) {
-                            var listElem = angular.element('<ul>');
-                            element.append(listElem);
-
-                            data.forEach(function (d) {
-                                var itemElement = angular.element('<li>');
-                                listElem.append(itemElement);
-                                var watchFn = function (watchScope) {
-                                    return watchScope.$eval(propertyExpression, d);
-                                };
-                                scope.$watch(watchFn, function (newVal) {
-                                    itemElement.text(newVal);
-                                });
-                            });
+                    return {
+                        link: function (scope, elem, attrs) {
+                            scope.data = scope[attrs['unorderedList']];
+                        },
+                        restrict: 'A',
+                        templateUrl: function (elem, attrs) {
+                            return attrs.template === 'table' ?
+                                'tableTemplate.html' : 'itemTemplate.html';
                         }
                     };
                 });
@@ -55,8 +45,11 @@
                     Change Prices
                 </button>
             </div>
+            <select ng-options="temp for temp in ['table', 'item']" ng-model="template"></select>
             <div class="panel-body">
-                <div unordered-list="products" list-property="price | currency"></div>
+                <div unordered-list="products" template="{{template}}">
+                    The list will be here
+                </div>
             </div>
         </div>
     </body>

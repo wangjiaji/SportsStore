@@ -3,16 +3,71 @@
     <head>
         <title>AngluarJS Demo</title>
         <script src="angularjs/angular.js"></script>
-        <script src="angularjs/i18n/angular-locale_fr-fr.js"></script>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
         <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
         <script>
             angular.module('exampleApp', [])
+                .config(function ($httpProvider) {
+                    $httpProvider.interceptors.push(function () {
+                        return {
+                            request: function (config) {
+                                config.url = 'productData.json';
+                                return config;
+                            },
+                            response: function (resp) {
+                                console.log('Data Count: ' + resp.data.length);
+                                return resp;
+                            }
+                        };
+                    });
+                })
                 .controller('defaultCtrl', function ($scope, $http) {
                     $scope.loadData = function () {
-                        $http.get('productData.json').success(function (data) {
+                        var config = {
+                            transformResponse: function (data, headers) {
+                                if (headers('content-type') === 'application/xml' &&
+                                    angular.isString(data)) {
+                                    var products = [];
+                                    var prodElems = angular.element(data.trim()).find('product');
+
+                                    for (var i = 0; i < prodElems.length; i++) {
+                                        var product = prodElems.eq(i);
+                                        products.push({
+                                            name: product.attr('name'),
+                                            category: product.attr('category'),
+                                            price: product.attr('price')
+                                        });
+                                    }
+                                    return products;
+                                } else {
+                                    return data;
+                                }
+
+                            }
+                        };
+
+                        $http.get('productData.xml', config).success(function (data) {
                             $scope.products = data;
                         });
+                    };
+
+                    $scope.sendData = function () {
+                        var config = {
+                            headers: {
+                                'content-type': 'application/xml'
+                            },
+                            transformRequest: function (data, headers) {
+                                var rootElem = angular.element('<xml>');
+                                data.forEach(function (d) {
+                                    var prodElem = angular.element('<product>');
+                                    prodElem.attr(d);
+                                    rootElem.append(prodElem);
+                                });
+                                rootElem.children().wrap('<products');
+                                return rootElem.html();
+                            }
+                        };
+                        $http.post('ajax.html', $scope.products, config);
                     };
                 });
         </script>
@@ -26,12 +81,13 @@
                     </thead>
                     <tbody>
                         <tr ng-hide="products.length">
-                            <td colspan="3" class="text-center">No Data</td>
+                            <td colspan="4" class="text-center">No Data</td>
                         </tr>
 
                         <tr ng-repeat="p in products | orderBy:'price'">
                             <td>{{p.name}}</td>
                             <td>{{p.category}}</td>
+                            <td>{{p.expiry}}</td>
                             <td class="text-right">{{p.price | currency}}</td>
                         </tr>
                     </tbody>
