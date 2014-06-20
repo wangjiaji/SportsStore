@@ -16,9 +16,7 @@
     <div ng-controller="ControllerUpdateOn">
     <form>
       Name:
-      <input type="text" ng-model="user.name" ng-model-options="{ updateOn: 'blur' }" /><br />
-      Other data:
-      <input type="text" ng-model="user.data" /><br />
+      <input type="text" ng-model="user.name" ng-model-options="{ debounce: 250 }" /><br />
     </form>
     <pre>username = "{{user.name}}"</pre>
   </div>

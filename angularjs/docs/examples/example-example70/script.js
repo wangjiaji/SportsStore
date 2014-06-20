@@ -1,1 +1,1 @@
-  angular.module('ngSwipeLeftExample', ['ngTouch']);
+  angular.module('ngSwipeRightExample', ['ngTouch']);

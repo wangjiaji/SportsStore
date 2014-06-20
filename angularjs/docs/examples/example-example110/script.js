@@ -1,8 +1,6 @@
-  function GreetCtrl($scope, $rootScope) {
-    $scope.name = 'World';
-    $rootScope.department = 'Angular';
-  }
-
-  function ListCtrl($scope) {
-    $scope.names = ['Igor', 'Misko', 'Vojta'];
+  function EventController($scope) {
+    $scope.count = 0;
+    $scope.$on('MyEvent', function() {
+      $scope.count++;
+    });
   }

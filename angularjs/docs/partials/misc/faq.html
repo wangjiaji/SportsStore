@@ -47,7 +47,7 @@ in Angular.</p>
 application is being bootstrapped. If jQuery is not present in your script path, Angular falls back
 to its own implementation of the subset of jQuery that we call <a href="api/ng/function/angular.element">jQLite</a>.</p>
 <p>Due to a change to use <code>on()</code>/<code>off()</code> rather than <code>bind()</code>/<code>unbind()</code>, Angular 1.2 only operates with
-jQuery 1.7.1 or above.</p>
+jQuery 1.7.1 or above. However, Angular does not currently support jQuery 2.x or above.</p>
 <h3 id="what-is-testability-like-in-angular-">What is testability like in Angular?</h3>
 <p>Very testable and designed this way from ground up. It has an integrated dependency injection
 framework, provides mocks for many heavy dependencies (server-side communication). See

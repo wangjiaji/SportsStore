@@ -74,7 +74,7 @@ service, the <code>$routeProvider</code> exposes APIs that allow you to define r
 <p>Angular modules solve the problem of removing global state from the application and provide a way
 of configuring the injector. As opposed to AMD or require.js modules, Angular modules don&#39;t try to
 solve the problem of script load ordering or lazy script fetching. These goals are totally independent and
-both module systems can live side by side and fulfil their goals.</p>
+both module systems can live side by side and fulfill their goals.</p>
 <p>To deepen your understanding of DI on Angular, see
 <a href="https://github.com/angular/angular.js/wiki/Understanding-Dependency-Injection">Understanding Dependency Injection</a>.</p>
 <h2 id="template">Template</h2>
@@ -232,10 +232,17 @@ your app.</p>
 <p>To automatically verify that everything is wired properly, we wrote end-to-end tests that navigate
 to various URLs and verify that the correct view was rendered.</p>
 <pre><code class="lang-js">...
-  it(&#39;should redirect index.html to index.html#/phones&#39;, function() {
-    browser().navigateTo(&#39;app/index.html&#39;);
-    expect(browser().location().url()).toBe(&#39;/phones&#39;);
+   it(&#39;should redirect index.html to index.html#/phones&#39;, function() {
+    browser.get(&#39;app/index.html&#39;);
+    browser.getLocationAbsUrl().then(function(url) {
+        expect(url.split(&#39;#&#39;)[1]).toBe(&#39;/phones&#39;);
+      });
   });
+
+  describe(&#39;Phone list view&#39;, function() {
+    beforeEach(function() {
+      browser.get(&#39;app/index.html#/phones&#39;);
+    });
 ...
 
   describe(&#39;Phone detail view&#39;, function() {

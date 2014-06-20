@@ -5,17 +5,17 @@
   <title>Example - example-example96-production</title>
   
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.9/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.11/angular.min.js"></script>
   <script src="script.js"></script>
   
 
   
 </head>
-<body ng-app="eventExampleApp">
+<body ng-app="oneTimeBidingExampleApp">
     <div ng-controller="EventController">
-    <button ng-click="clickMe($event)">Event</button>
-    <p><code>$event</code>: <pre> {{$event | json}}</pre></p>
-    <p><code>clickEvent</code>: <pre>{{clickEvent | json}}</pre></p>
+    <button ng-click="clickMe($event)">Click Me</button>
+    <p id="one-time-binding-example">One time binding: {{::name}}</p>
+    <p id="normal-binding-example">Normal binding: {{name}}</p>
   </div>
 </body>
 </html>

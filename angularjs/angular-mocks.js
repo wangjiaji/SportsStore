@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.0-beta.11
+ * @license AngularJS v1.3.0-beta.13
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -1743,7 +1743,7 @@ angular.mock.$RootElementProvider = function() {
  *
  * # ngMock
  *
- * The `ngMock` module providers support to inject and mock Angular services into unit tests.
+ * The `ngMock` module provides support to inject and mock Angular services into unit tests.
  * In addition, ngMock also extends various core ng services such that they can be
  * inspected and controlled in a synchronous manner within test code.
  *

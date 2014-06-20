@@ -3,48 +3,16 @@
     <head>
         <title>Components</title>
         <script src="angularjs/angular.js"></script>
+        <script src="app.js"></script>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
         <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
-        <script>
-            angular.module('exampleApp', [])
-                .config(function ($provide) {
-                    $provide.decorator('$log', function ($delegate) {
-                        $delegate.originalLog = $delegate.log;
-                        $delegate.log = function (msg) {
-                            $delegate.originalLog('Decorated: ' + msg);
-                        };
-                        return $delegate;
-                    });
-                })
-                .controller('defaultCtrl', function ($scope, $log, $injector) {
-                    var count = 0;
-
-                    var logClick = function ($log, $exceptionHandler, msg) {
-                        if (count === 0) {
-                            $log.log(msg);
-                            count++;
-                        } else {
-                            $exceptionHandler('Already Clicked');
-                        }
-                    }
-
-                    $scope.handleClick = function () {
-                        var deps = $injector.annotate(logClick);
-                        var args = deps.map(function (dep) {
-                            if ($injector.has(dep)) {
-                                return $injector.get(dep);
-                            } else if (dep === 'msg') {
-                                return 'Button clicked!';
-                            }
-                        });
-                        logClick.apply(null, args);
-                    };
-                });
-        </script>
     </head>
     <body ng-controller="defaultCtrl">
-        <div class="well">
-            <button class="btn btn-primary" ng-click="handleClick()">Click Me!</button>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>Counter: {{counter}}</p>
+                <p><button class="btn btn-primary" ng-click="incrementCounter()">Increment</button></p>
+            </div>
         </div>
     </body>
 </html>

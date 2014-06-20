@@ -2,7 +2,7 @@
 
 
 
-<a href='http://github.com/angular/angular.js/tree/master/src/ng/directive/input.js#L1415' class='view-source pull-right btn btn-primary'>
+<a href='http://github.com/angular/angular.js/tree/master/src/ng/directive/input.js#L1366' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -181,7 +181,8 @@ implies empty.</p>
 </h3>
     <div><p>Change the validity state, and notifies the form when the control changes validity. (i.e. it
 does not notify form if given validator is already marked as invalid).</p>
-<p>This method should be called by validators - i.e. the parser or formatter functions.</p>
+<p>This method can be called within $parsers/$formatters. However, if possible, please use the
+       <code>ngModel.$validators</code> pipeline which is designed to handle validations with true/false values.</p>
 </div>
 
     
@@ -250,7 +251,46 @@ does not notify form if given validator is already marked as invalid).</p>
 </h3>
     <div><p>Sets the control to its pristine state.</p>
 <p>This method can be called to remove the &#39;ng-dirty&#39; class and set the control to its pristine
-state (ng-pristine class).</p>
+state (ng-pristine class). A model is considered to be pristine when the model has not been changed
+from when first compiled within then form.</p>
+</div>
+
+    
+
+    
+    
+    
+
+  </li>
+  
+  <li id="$setUntouched">
+    <h3><p><code>$setUntouched();</code></p>
+
+</h3>
+    <div><p>Sets the control to its untouched state.</p>
+<p>This method can be called to remove the &#39;ng-touched&#39; class and set the control to its
+untouched state (ng-untouched class). Upon compilation, a model is set as untouched
+by default, however this function can be used to restore that state if the model has
+already been touched by the user.</p>
+</div>
+
+    
+
+    
+    
+    
+
+  </li>
+  
+  <li id="$setTouched">
+    <h3><p><code>$setTouched();</code></p>
+
+</h3>
+    <div><p>Sets the control to its touched state.</p>
+<p>This method can be called to remove the &#39;ng-untouched&#39; class and set the control to its
+touched state (ng-touched class). A model is considered to be touched when the user has
+first interacted (focussed) on the model input element and then shifted focus away (blurred)
+from the input element.</p>
 </div>
 
     
@@ -309,6 +349,21 @@ input field will be updated with the new model value and any pending operations 
 </div>
 
 </p>
+</div>
+
+    
+
+    
+    
+    
+
+  </li>
+  
+  <li id="$validate">
+    <h3><p><code>$validate();</code></p>
+
+</h3>
+    <div><p>Runs each of the registered validations set on the $validators object.</p>
 </div>
 
     
@@ -475,6 +530,21 @@ ngModel.$formatters.push(formatter);</code></pre>
 </table>
   </li>
   
+  <li id="$validators">
+    <h3><code>$validators</code></h3>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-object">Object.&lt;string, function&gt;</a></td>
+    <td><p>A collection of validators that are applied
+     whenever the model value changes. The key value within the object refers to the name of the
+     validator while the function refers to the validation operation. The validation operation is
+     provided with the model value as an argument and must return a true or false value depending
+     on the response of that validation.</p>
+</td>
+  </tr>
+</table>
+  </li>
+  
   <li id="$viewChangeListeners">
     <h3><code>$viewChangeListeners</code></h3>
     <table class="variables-matrix return-arguments">
@@ -494,6 +564,28 @@ ngModel.$formatters.push(formatter);</code></pre>
   <tr>
     <td><a href="" class="label type-hint type-hint-object">Object</a></td>
     <td><p>An object hash with all errors as keys.</p>
+</td>
+  </tr>
+</table>
+  </li>
+  
+  <li id="$untouched">
+    <h3><code>$untouched</code></h3>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-boolean">boolean</a></td>
+    <td><p>True if control has not lost focus yet.</p>
+</td>
+  </tr>
+</table>
+  </li>
+  
+  <li id="$touched">
+    <h3><code>$touched</code></h3>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-boolean">boolean</a></td>
+    <td><p>True if control has lost focus.</p>
 </td>
   </tr>
 </table>
